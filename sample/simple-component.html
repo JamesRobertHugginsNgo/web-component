@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<simple-component>Universe</simple-component>
+
+	<simple-component greeting="Bonjour">Univers</simple-component>
+
+	<simple-component id="ref"></simple-component>
+
+	<script type="module" src="../src/simple-component.js"></script>
+	<script>
+		const refEl = document.getElementById('ref');
+		refEl.greeting = 'Hola';
+		refEl.append('Universo');
+
+		const newEl = document.createElement('simple-component');
+		newEl.setAttribute('greeting', 'Saluton');
+		newEl.append('Universo');
+		document.body.append(newEl);
+	</script>
+</body>
+
+</html>

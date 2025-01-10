@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<form action="submit.html" method="get">
+		<form-component name="component-1" value="123"></form-component>
+
+		<form-component name="component-2" required></form-component>
+
+		<form-component disabled name="component-3" value="789"></form-component>
+
+		<fieldset disabled>
+			<legend>Fieldset</legend>
+
+			<form-component name="component-4" value="abc"></form-component>
+
+			<form-component name="component-5" value="def"></form-component>
+		</fieldset>
+
+		<p>
+			<input type="submit" value="Submit">
+			<input type="reset" value="Reset">
+		</p>
+	</form>
+
+	<script type="module" src="../src/form-component.js"></script>
+	<script>
+		const formEl = document.querySelector('form');
+		formEl.addEventListener('submit', (event) => {
+			const formData = new FormData(formEl);
+			for (const [name, value] of formData) {
+				console.log(name, value);
+			}
+
+			alert('Submitted');
+		})
+	</script>
+</body>
+
+</html>
