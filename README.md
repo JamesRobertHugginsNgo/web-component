@@ -4,7 +4,7 @@
 	- [Simple Component](src/simple-component.js)
 	- [Advance Component](src/advance-component.js)
 	- [Form Component](src/form-component.js)
-- Sample Page
+- Sample Pages
 	- [Simple Component](sample/simple-component.html)
 	- [Advance Component](sample/advance-component.html)
 	- [Form Component](sample/form-component.html)

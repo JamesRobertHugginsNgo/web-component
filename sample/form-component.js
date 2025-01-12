@@ -1,14 +1,30 @@
-/* BOILERPLATE */
+/* BOILERPLATE: ../src/form-component.js */
 
 const templateEl = document.createElement('template');
 templateEl.innerHTML = `
 	<style>
 		:host {
 			display: block;
+			margin-bottom: 1rem;
+			margin-top: 1rem;
+		}
+
+		input {
+			border: 2px solid darkgrey;
+			font-size: 1rem;
+			line-height: normal;
+			padding: 0.5rem 1rem;
+
+			&:valid {
+				border-color: darkgreen;
+			}
+			&:invalid {
+				border-color: darkred;
+			}
 		}
 	</style>
 
-	<input>
+	<input type="text">
 `;
 
 class FormComponent extends HTMLElement {
@@ -16,7 +32,11 @@ class FormComponent extends HTMLElement {
 	// STATIC PROPERTY(IES)
 
 	static formAssociated = true;
-	static observedAttributes = [];
+	static observedAttributes = [
+		'readonly',
+		'required',
+		'value'
+	];
 
 	// STATIC METHOD(S)
 
@@ -24,6 +44,8 @@ class FormComponent extends HTMLElement {
 
 	#inputEl;
 	#internals;
+	#readOnly;
+	#required;
 
 	// PRIVATE METHOD(S)
 
@@ -44,6 +66,36 @@ class FormComponent extends HTMLElement {
 
 	get name() {
 		return this.getAttribute('name');
+	}
+
+	get readonly() {
+		return this.#readOnly;
+	}
+	set readonly(newValue) {
+		this.#readOnly = newValue;
+
+		if (this.#readOnly == null) {
+			this.#inputEl.removeAttribute('readonly');
+		} else {
+			this.#inputEl.setAttribute('readonly', '');
+		}
+
+		this.#setValidity();
+	}
+
+	get required() {
+		return this.#required;
+	}
+	set required(newValue) {
+		this.#required = newValue;
+
+		if (this.#required == null) {
+			this.#inputEl.removeAttribute('required');
+		} else {
+			this.#inputEl.setAttribute('required', '');
+		}
+
+		this.#setValidity();
 	}
 
 	get validity() {
@@ -77,6 +129,8 @@ class FormComponent extends HTMLElement {
 	constructor() {
 		super();
 
+		console.log('CONSTRUCTOR', this);
+
 		this.attachShadow({
 			mode: 'open',
 			delegatesFocus: true
@@ -92,23 +146,41 @@ class FormComponent extends HTMLElement {
 		});
 	}
 
-	connectedCallback() { }
+	connectedCallback() {
+		console.log('CONNECTED CALLBACK', this);
+	}
 
-	disconnectedCallback() { }
+	disconnectedCallback() {
+		console.log('DISCONNECTED CALLBACK', this);
+	}
 
-	adoptedCallback() { }
+	adoptedCallback() {
+		console.log('ADOPTED CALLBACK');
+	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
+		console.log('ATTRIBUTE CHANGED CALLBACK', this);
+
 		switch (name) {
+			case 'readonly':
+				this.readonly = newValue;
+				break;
+			case 'required':
+				this.required = newValue;
+				break;
 			case 'value':
 				this.value = newValue;
 				break;
 		}
 	}
 
-	formAssociatedCallback(formEl) { }
+	formAssociatedCallback(formEl) {
+		console.log('FORM ASSOCIATED CALLBACK', this, formEl);
+	}
 
 	formResetCallback() {
+		console.log('FORM RESET CALLBACK', this);
+
 		const value = this.getAttribute('value');
 		if (value == null) {
 			this.value = '';
@@ -118,6 +190,8 @@ class FormComponent extends HTMLElement {
 	}
 
 	formDisabledCallback(isDisabled) {
+		console.log('FORM DISABLED CALLBACK', this, isDisabled);
+
 		if (isDisabled) {
 			this.#inputEl.setAttribute('disabled', '');
 		} else {
@@ -125,7 +199,9 @@ class FormComponent extends HTMLElement {
 		}
 	}
 
-	formStateRestoreCallback(state, reason) { }
+	formStateRestoreCallback(state, reason) {
+		console.log('FORM STATE RESTORE CALLBACK', state, reason);
+	}
 }
 
 customElements.define('form-component', FormComponent);
