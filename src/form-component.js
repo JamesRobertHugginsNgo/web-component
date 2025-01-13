@@ -16,7 +16,7 @@ class FormComponent extends HTMLElement {
 	// STATIC PROPERTY(IES)
 
 	static formAssociated = true;
-	static observedAttributes = [];
+	static observedAttributes = ['value'];
 
 	// STATIC METHOD(S)
 
@@ -123,6 +123,7 @@ class FormComponent extends HTMLElement {
 		} else {
 			this.#inputEl.removeAttribute('disabled');
 		}
+		this.#setValidity();
 	}
 
 	formStateRestoreCallback(state, reason) { }

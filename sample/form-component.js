@@ -197,6 +197,7 @@ class FormComponent extends HTMLElement {
 		} else {
 			this.#inputEl.removeAttribute('disabled');
 		}
+		this.#setValidity();
 	}
 
 	formStateRestoreCallback(state, reason) {
