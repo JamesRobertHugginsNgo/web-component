@@ -8,21 +8,23 @@
 </head>
 
 <body>
-	<simple-component>Universe</simple-component>
+	<simple-component></simple-component>
 
-	<simple-component greeting="Bonjour">Univers</simple-component>
+	<simple-component>World</simple-component>
+
+	<simple-component greeting="Bonjour">Monde</simple-component>
 
 	<simple-component id="ref"></simple-component>
 
-	<script type="module" src="simple-component.js"></script>
+	<script type="module" src="../dist/simple-component.js"></script>
 	<script>
 		const refEl = document.getElementById('ref');
 		refEl.greeting = 'Hola';
-		refEl.append('Universo');
+		refEl.append('Mundo');
 
 		const newEl = document.createElement('simple-component');
 		newEl.setAttribute('greeting', 'Saluton');
-		newEl.append('Universo');
+		newEl.append('Mundo');
 		document.body.append(newEl);
 	</script>
 </body>
