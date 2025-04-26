@@ -88,11 +88,11 @@ export default class AdvanceComponent extends HTMLElement {
 	}
 
 	adoptedCallback() {
-		console.log('ADOPTED CALLBACK');
+		console.log('ADOPTED CALLBACK', this);
 	}
 
 	attributeChangedCallback(name: string, oldValue: null | string, newValue: null | string) {
-		console.log('ATTRIBUTE CHANGED CALLBACK', name, oldValue, newValue);
+		console.log('ATTRIBUTE CHANGED CALLBACK', this, name, oldValue, newValue);
 
 		switch (name) {
 			case 'start':

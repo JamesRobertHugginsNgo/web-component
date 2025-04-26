@@ -55,7 +55,7 @@ export default class SimpleComponent extends HTMLElement {
 	constructor() {
 		super();
 
-		console.log('CONSTRUCTOR');
+		console.log('CONSTRUCTOR', this);
 
 		this.attachShadow({ mode: 'open' });
 		this.shadowRoot!.appendChild(templateEl.content.cloneNode(true));
@@ -65,19 +65,19 @@ export default class SimpleComponent extends HTMLElement {
 	}
 
 	connectedCallback() {
-		console.log('CONNECTED CALLBACK');
+		console.log('CONNECTED CALLBACK', this);
 	}
 
 	disconnectedCallback() {
-		console.log('DISCONNECTED CALLBACK');
+		console.log('DISCONNECTED CALLBACK', this);
 	}
 
 	adoptedCallback() {
-		console.log('ADOPTED CALLBACK');
+		console.log('ADOPTED CALLBACK', this);
 	}
 
 	attributeChangedCallback(name: string, oldValue: null | string, newValue: null | string) {
-		console.log('ATTRIBUTE CHANGED CALLBACK', name, oldValue, newValue);
+		console.log('ATTRIBUTE CHANGED CALLBACK', this, name, oldValue, newValue);
 
 		switch (name) {
 			case 'greeting':

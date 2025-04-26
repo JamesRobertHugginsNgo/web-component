@@ -8,7 +8,7 @@
   "type": "module",
   "main": "src/script.js",
   "scripts": {
-    "build": "tsc -project ./tsconfig.json && prettier --write ./dist/**/*.[tj]s",
+    "build": "tsc -project ./tsconfig.json && prettier --single-quote --write ./dist/**/*.[tj]s",
     "watch": "tsc -project ./tsconfig.json --watch",
     "copyfiles": "node copy-files.js"
   },

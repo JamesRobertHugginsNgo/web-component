@@ -22,14 +22,16 @@ An advance web component that uses manual slot assignment and observes element m
 - Boilerplate Code
 	- [TypeScript (src/advance-component.ts)](src/advance-component.ts)
 	- [JavaScript (dist/advance-component.js)](dist/advance-component.js)
-- [Sample Code](sample/advance-component.html)
+- [Sample Code (sample/advance-component.html)](sample/advance-component.html)
 
 ## form-component
 
-{{ DESCRIPTION }}
+A form input component that will work with a standard HTML form element.
 
-- [Boilerplate Code](src/form-component.js)
-- [Sample Code](sample/form-component.html)
+- Boilerplate Code
+	- [TypeScript (src/form-component.ts)](src/form-component.ts)
+	- [JavaScript (dist/form-component.js)](dist/form-component.js)
+- [Sample Code (sample/form-component.html)](sample/form-component.html)
 
 ## References
 

@@ -1,5 +1,5 @@
 // == TEMPLATE ==
-const templateEl = document.createElement("template");
+const templateEl = document.createElement('template');
 templateEl.innerHTML = `
 	<style>
 		:host {
@@ -14,7 +14,7 @@ templateEl.innerHTML = `
 // == CLASS ==
 export default class SimpleComponent extends HTMLElement {
 	// -- STATIC PROPERTY(IES) --
-	static observedAttributes = ["greeting"];
+	static observedAttributes = ['greeting'];
 	// -- STATIC METHOD(S) --
 	// -- PRIVATE PROPERTY(IES) --
 	#rootEl;
@@ -28,38 +28,44 @@ export default class SimpleComponent extends HTMLElement {
 	set greeting(newValue) {
 		this.#greeting = newValue;
 		if (this.#greeting == null) {
-			this.#rootEl.replaceChildren("Hello ", this.#slotEL);
+			this.#rootEl.replaceChildren('Hello ', this.#slotEL);
 			return;
 		}
-		this.#rootEl.replaceChildren(this.#greeting, " ", this.#slotEL);
+		this.#rootEl.replaceChildren(this.#greeting, ' ', this.#slotEL);
 	}
 	// -- PUBLIC METHOD(S) --
 	// -- LIFE CYCLE --
 	constructor() {
 		super();
-		console.log("CONSTRUCTOR");
-		this.attachShadow({ mode: "open" });
+		console.log('CONSTRUCTOR', this);
+		this.attachShadow({ mode: 'open' });
 		this.shadowRoot.appendChild(templateEl.content.cloneNode(true));
-		this.#rootEl = this.shadowRoot.querySelector("p");
-		this.#slotEL = this.#rootEl.querySelector("slot");
+		this.#rootEl = this.shadowRoot.querySelector('p');
+		this.#slotEL = this.#rootEl.querySelector('slot');
 	}
 	connectedCallback() {
-		console.log("CONNECTED CALLBACK");
+		console.log('CONNECTED CALLBACK', this);
 	}
 	disconnectedCallback() {
-		console.log("DISCONNECTED CALLBACK");
+		console.log('DISCONNECTED CALLBACK', this);
 	}
 	adoptedCallback() {
-		console.log("ADOPTED CALLBACK");
+		console.log('ADOPTED CALLBACK', this);
 	}
 	attributeChangedCallback(name, oldValue, newValue) {
-		console.log("ATTRIBUTE CHANGED CALLBACK", name, oldValue, newValue);
+		console.log(
+			'ATTRIBUTE CHANGED CALLBACK',
+			this,
+			name,
+			oldValue,
+			newValue,
+		);
 		switch (name) {
-			case "greeting":
+			case 'greeting':
 				this.greeting = newValue;
 				break;
 		}
 	}
 }
 // == DEFINE ==
-customElements.define("simple-component", SimpleComponent);
+customElements.define('simple-component', SimpleComponent);

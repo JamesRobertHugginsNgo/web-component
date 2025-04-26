@@ -16,9 +16,8 @@
 
 	<simple-component id="ref"></simple-component>
 
+	<script type="module" src="../dist/simple-component.js"></script>
 	<script type="module">
-		import '../dist/simple-component.js';
-
 		const refEl = document.getElementById('ref');
 		refEl.greeting = 'Hola';
 		refEl.append('Mundo');
