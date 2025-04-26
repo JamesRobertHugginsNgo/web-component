@@ -1,4 +1,4 @@
-/* BOILERPLATE: ../src/form-component.js */
+// == TEMPLATE ==
 
 const templateEl = document.createElement('template');
 templateEl.innerHTML = `
@@ -8,7 +8,6 @@ templateEl.innerHTML = `
 			margin-bottom: 1rem;
 			margin-top: 1rem;
 		}
-
 		input {
 			border: 2px solid darkgrey;
 			font-size: 1rem;
@@ -23,13 +22,14 @@ templateEl.innerHTML = `
 			}
 		}
 	</style>
-
 	<input type="text">
 `;
 
+// == CLASS ==
+
 class FormComponent extends HTMLElement {
 
-	// STATIC PROPERTY(IES)
+	// -- STATIC PROPERTY(IES) --
 
 	static formAssociated = true;
 	static observedAttributes = [
@@ -38,16 +38,18 @@ class FormComponent extends HTMLElement {
 		'value'
 	];
 
-	// STATIC METHOD(S)
+	// -- STATIC METHOD(S) --
 
-	// PRIVATE PROPERTY(IES)
+	// -- PRIVATE PROPERTY(IES) --
 
-	#inputEl;
-	#internals;
-	#readOnly;
-	#required;
+	#internals: ElementInternals;
 
-	// PRIVATE METHOD(S)
+	#inputEl: HTMLInputElement;
+
+	#readOnly: null | string = null;
+	#required: null | string = null;
+
+	// -- PRIVATE METHOD(S) --
 
 	#setFormValue() {
 		this.#internals.setFormValue(this.#inputEl.value);
@@ -62,7 +64,7 @@ class FormComponent extends HTMLElement {
 		);
 	}
 
-	// PUBLIC PROPERTY(IES)
+	// -- PUBLIC PROPERTY(IES) --
 
 	get name() {
 		return this.getAttribute('name');
@@ -73,13 +75,11 @@ class FormComponent extends HTMLElement {
 	}
 	set readonly(newValue) {
 		this.#readOnly = newValue;
-
 		if (this.#readOnly == null) {
 			this.#inputEl.removeAttribute('readonly');
 		} else {
 			this.#inputEl.setAttribute('readonly', '');
 		}
-
 		this.#setValidity();
 	}
 
@@ -88,13 +88,11 @@ class FormComponent extends HTMLElement {
 	}
 	set required(newValue) {
 		this.#required = newValue;
-
 		if (this.#required == null) {
 			this.#inputEl.removeAttribute('required');
 		} else {
 			this.#inputEl.setAttribute('required', '');
 		}
-
 		this.#setValidity();
 	}
 
@@ -135,11 +133,10 @@ class FormComponent extends HTMLElement {
 			mode: 'open',
 			delegatesFocus: true
 		});
-		this.shadowRoot.appendChild(templateEl.content.cloneNode(true));
-
+		this.shadowRoot!.appendChild(templateEl.content.cloneNode(true));
 		this.#internals = this.attachInternals();
 
-		this.#inputEl = this.shadowRoot.querySelector('input');
+		this.#inputEl = this.shadowRoot!.querySelector('input')!;
 		this.#setValidity();
 		this.#inputEl.addEventListener('input', () => {
 			this.#setFormValue();
@@ -155,11 +152,11 @@ class FormComponent extends HTMLElement {
 	}
 
 	adoptedCallback() {
-		console.log('ADOPTED CALLBACK');
+		console.log('ADOPTED CALLBACK', this);
 	}
 
-	attributeChangedCallback(name, oldValue, newValue) {
-		console.log('ATTRIBUTE CHANGED CALLBACK', this);
+	attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+		console.log('ATTRIBUTE CHANGED CALLBACK', this, name, oldValue, newValue);
 
 		switch (name) {
 			case 'readonly':
@@ -174,7 +171,7 @@ class FormComponent extends HTMLElement {
 		}
 	}
 
-	formAssociatedCallback(formEl) {
+	formAssociatedCallback(formEl: HTMLFormElement) {
 		console.log('FORM ASSOCIATED CALLBACK', this, formEl);
 	}
 
@@ -189,7 +186,7 @@ class FormComponent extends HTMLElement {
 		}
 	}
 
-	formDisabledCallback(isDisabled) {
+	formDisabledCallback(isDisabled: boolean) {
 		console.log('FORM DISABLED CALLBACK', this, isDisabled);
 
 		if (isDisabled) {
@@ -200,9 +197,16 @@ class FormComponent extends HTMLElement {
 		this.#setValidity();
 	}
 
-	formStateRestoreCallback(state, reason) {
-		console.log('FORM STATE RESTORE CALLBACK', state, reason);
+	formStateRestoreCallback(state: null | string | File | FormData, reason: 'restore' | 'autocomplete') {
+		console.log('FORM STATE RESTORE CALLBACK', this, state, reason);
+
+		if (state == null) {
+			return;
+		}
+		this.#inputEl.value = state as string;
 	}
 }
+
+// == DEFINE ==
 
 customElements.define('form-component', FormComponent);

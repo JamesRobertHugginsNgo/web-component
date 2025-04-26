@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"noImplicitAny": true,
+		"module": "ESNext",
+		"outDir": "./dist/",
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "ESNext"
+	},
+	"exclude": [
+		"./node_modules/**/*"
+	],
+	"include": [
+		"./src/**/*.ts"
+	]
+}

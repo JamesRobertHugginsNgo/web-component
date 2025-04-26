@@ -1,77 +1,65 @@
-/* BOILERPLATE: ../src/simple-component.js */
-
+// == TEMPLATE ==
 const templateEl = document.createElement('template');
 templateEl.innerHTML = `
 	<style>
 		:host {
 			display: block;
-			margin-bottom: 1rem;
-			margin-top: 1rem;
+		}
+		p {
+			margin: 1rem 0;
 		}
 	</style>
-
-	<span class="greeting">Hello</span> <slot>World</slot>.
+	<p>Hello <slot>there</slot></p>
 `;
-
-class SimpleComponent extends HTMLElement {
-
-	// STATIC PROPERTY(IES)
-
+// == CLASS ==
+export default class SimpleComponent extends HTMLElement {
+	// -- STATIC PROPERTY(IES) --
 	static observedAttributes = ['greeting'];
-
-	// STATIC METHOD(S)
-
-	// PRIVATE PROPERTY(IES)
-
-	#greeting;
-	#greetingEl;
-
-	// PRIVATE METHOD(S)
-
-	// PUBLIC PROPERTY(IES)
-
+	// -- STATIC METHOD(S) --
+	// -- PRIVATE PROPERTY(IES) --
+	#rootEl;
+	#slotEL;
+	#greeting = null;
+	// -- PRIVATE METHOD(S) --
+	// -- PUBLIC PROPERTY(IES) --
 	get greeting() {
 		return this.#greeting;
 	}
 	set greeting(newValue) {
 		this.#greeting = newValue;
 		if (this.#greeting == null) {
-			this.#greetingEl.textContent = 'Hello';
-		} else {
-			this.#greetingEl.textContent = this.#greeting;
+			this.#rootEl.replaceChildren('Hello ', this.#slotEL);
+			return;
 		}
+		this.#rootEl.replaceChildren(this.#greeting, ' ', this.#slotEL);
 	}
-
-	// PUBLIC METHOD(S)
-
-	// LIFE CYCLE
-
+	// -- PUBLIC METHOD(S) --
+	// -- LIFE CYCLE --
 	constructor() {
 		super();
-
 		console.log('CONSTRUCTOR', this);
-
 		this.attachShadow({ mode: 'open' });
 		this.shadowRoot.appendChild(templateEl.content.cloneNode(true));
-
-		this.#greetingEl = this.shadowRoot.querySelector('.greeting');
+		this.#rootEl = this.shadowRoot.querySelector('p');
+		this.#slotEL = this.#rootEl.querySelector('slot');
 	}
-
 	connectedCallback() {
 		console.log('CONNECTED CALLBACK', this);
 	}
-
 	disconnectedCallback() {
 		console.log('DISCONNECTED CALLBACK', this);
 	}
-
 	adoptedCallback() {
 		console.log('ADOPTED CALLBACK', this);
 	}
-
 	attributeChangedCallback(name, oldValue, newValue) {
-		console.log('ATTRIBUTE CHANGED CALLBACK', this);
-
+		console.log(
+			'ATTRIBUTE CHANGED CALLBACK',
+			this,
+			name,
+			oldValue,
+			newValue,
+		);
 		switch (name) {
 			case 'greeting':
 				this.greeting = newValue;
@@ -79,5 +67,5 @@ class SimpleComponent extends HTMLElement {
 		}
 	}
 }
-
+// == DEFINE ==
 customElements.define('simple-component', SimpleComponent);
