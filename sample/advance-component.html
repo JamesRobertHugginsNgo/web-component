@@ -22,8 +22,9 @@
 
 	<advance-component class="middle" id="ref"></advance-component>
 
-	<script type="module" src="../dist/advance-component.js"></script>
-	<script>
+	<script type="module">
+		import '../dist/advance-component.js';
+
 		const refEl = document.getElementById('ref');
 		refEl.setAttribute('start', '4');
 		refEl.innerHTML = '<a href="#">Fourth</a><a href="#">Fifth</a><a href="#">Sixth</a>';
