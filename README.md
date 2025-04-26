@@ -11,27 +11,27 @@ Boilerplate code for creating web components.
 A simple web component that reacts to slot content and attribute/property changes.
 
 - Boilerplate Code
-	- [TypeScript (src/simple-component.ts)](src/simple-component.ts)
-	- [JavaScript (dist/simple-component.js)](dist/simple-component.js)
-- [Sample Code (sample/simple-component.html)](sample/simple-component.html)
+	- [TypeScript (src/simple-component.ts)](./src/simple-component.ts) [[Raw](./src/simple-component.ts?raw=1)]
+	- [JavaScript (dist/simple-component.js)](./dist/simple-component.js) [[Raw](./dist/simple-component.js?raw=1)]
+- [Sample Usage (sample/simple-component.html)](./sample/simple-component.html)
 
 ## advance-component
 
 An advance web component that uses manual slot assignment and observes element mutation.
 
 - Boilerplate Code
-	- [TypeScript (src/advance-component.ts)](src/advance-component.ts)
-	- [JavaScript (dist/advance-component.js)](dist/advance-component.js)
-- [Sample Code (sample/advance-component.html)](sample/advance-component.html)
+	- [TypeScript (src/advance-component.ts)](./src/advance-component.ts) [[Raw](./src/advance-component.ts?raw=1)]
+	- [JavaScript (dist/advance-component.js)](./dist/advance-component.js) [[Raw](./dist/advance-component.js?raw=1)]
+- [Sample Usage (sample/advance-component.html)](./sample/advance-component.html)
 
 ## form-component
 
 A form input component that will work with a standard HTML form element.
 
 - Boilerplate Code
-	- [TypeScript (src/form-component.ts)](src/form-component.ts)
-	- [JavaScript (dist/form-component.js)](dist/form-component.js)
-- [Sample Code (sample/form-component.html)](sample/form-component.html)
+	- [TypeScript (src/form-component.ts)](./src/form-component.ts) [[Raw](./src/form-component.ts)]
+	- [JavaScript (dist/form-component.js)](./dist/form-component.js) [[Raw](./dist/form-component.js)]
+- [Sample Code (sample/form-component.html)](./sample/form-component.html)
 
 ## References
 
