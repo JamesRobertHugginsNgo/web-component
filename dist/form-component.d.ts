@@ -2,11 +2,11 @@ export default class FormComponent extends HTMLElement {
 	#private;
 	static formAssociated: boolean;
 	static observedAttributes: string[];
-	get name(): string | null;
-	get readonly(): string | null;
-	set readonly(newValue: string | null);
-	get required(): string | null;
-	set required(newValue: string | null);
+	get name(): null | string;
+	get readonly(): boolean;
+	set readonly(newValue: boolean);
+	get required(): boolean;
+	set required(newValue: boolean);
 	get validity(): ValidityState;
 	get validationMessage(): string;
 	get value(): string;
