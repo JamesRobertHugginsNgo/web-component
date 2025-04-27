@@ -1,4 +1,3 @@
-'use strict';
 // == TEMPLATE ==
 const templateEl = document.createElement('template');
 templateEl.innerHTML = `
@@ -25,7 +24,7 @@ templateEl.innerHTML = `
 	<input type="text">
 `;
 // == CLASS ==
-class FormComponent extends HTMLElement {
+export default class FormComponent extends HTMLElement {
 	// -- STATIC PROPERTY(IES) --
 	static formAssociated = true;
 	static observedAttributes = ['readonly', 'required', 'value'];

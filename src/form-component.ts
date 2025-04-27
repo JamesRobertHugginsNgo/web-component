@@ -27,7 +27,7 @@ templateEl.innerHTML = `
 
 // == CLASS ==
 
-class FormComponent extends HTMLElement {
+export default class FormComponent extends HTMLElement {
 
 	// -- STATIC PROPERTY(IES) --
 

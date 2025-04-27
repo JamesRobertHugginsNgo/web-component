@@ -1,5 +1,4 @@
-declare const templateEl: HTMLTemplateElement;
-declare class FormComponent extends HTMLElement {
+export default class FormComponent extends HTMLElement {
 	#private;
 	static formAssociated: boolean;
 	static observedAttributes: string[];
