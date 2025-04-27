@@ -17,8 +17,8 @@
   "main": "",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/web-component.d.ts",
+      "default": "./dist/web-component.js"
     },
     "./advance-component": {
       "types": "./dist/advance-component.d.ts",
