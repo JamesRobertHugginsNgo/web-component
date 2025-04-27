@@ -15,7 +15,7 @@ export default class AdvanceComponent extends HTMLElement {
 	// -- STATIC METHOD(S) --
 	// -- PRIVATE PROPERTY(IES) --
 	#listEl;
-	#start = null;
+	#start = 1;
 	// -- PRIVATE METHOD(S) --
 	#mutationCallback() {
 		console.log('MUTATION CALLBACK', this);
@@ -33,12 +33,15 @@ export default class AdvanceComponent extends HTMLElement {
 		return this.#start;
 	}
 	set start(newValue) {
-		this.#start = newValue;
-		if (this.#start == null) {
-			this.#listEl.removeAttribute('start');
-		} else {
-			this.#listEl.setAttribute('start', this.#start);
+		if (this.#start === newValue) {
+			return;
 		}
+		this.#start = newValue;
+		if (this.#start == 1) {
+			this.#listEl.removeAttribute('start');
+			return;
+		}
+		this.#listEl.setAttribute('start', String(this.#start));
 	}
 	// -- PUBLIC METHOD(S) --
 	// -- LIFE CYCLE --
@@ -74,9 +77,19 @@ export default class AdvanceComponent extends HTMLElement {
 			newValue,
 		);
 		switch (name) {
-			case 'start':
-				this.start = newValue;
+			case 'start': {
+				if (newValue == null) {
+					this.start = 1;
+					break;
+				}
+				const numberValue = +newValue;
+				if (isNaN(numberValue)) {
+					this.start = 1;
+					break;
+				}
+				this.start = numberValue;
 				break;
+			}
 		}
 	}
 }
