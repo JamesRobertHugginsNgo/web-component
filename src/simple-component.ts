@@ -1,6 +1,6 @@
 // == TEMPLATE ==
 
-const templateEl = document.createElement('template');
+const templateEl: HTMLTemplateElement = document.createElement('template');
 templateEl.innerHTML = `
 	<style>
 		:host {
@@ -19,7 +19,7 @@ export default class SimpleComponent extends HTMLElement {
 
 	// -- STATIC PROPERTY(IES) --
 
-	static observedAttributes = [
+	static observedAttributes: string[] = [
 		'greeting'
 	];
 
@@ -36,15 +36,21 @@ export default class SimpleComponent extends HTMLElement {
 
 	// -- PUBLIC PROPERTY(IES) --
 
-	get greeting() {
+	get greeting(): null | string {
 		return this.#greeting;
 	}
-	set greeting(newValue) {
+	set greeting(newValue: null | string) {
+		if (this.#greeting === newValue) {
+			return;
+		}
+
 		this.#greeting = newValue;
+
 		if (this.#greeting == null) {
 			this.#rootEl.replaceChildren('Hello ', this.#slotEL);
 			return;
 		}
+
 		this.#rootEl.replaceChildren(this.#greeting, ' ', this.#slotEL);
 	}
 
@@ -64,19 +70,19 @@ export default class SimpleComponent extends HTMLElement {
 		this.#slotEL = this.#rootEl.querySelector('slot')!;
 	}
 
-	connectedCallback() {
+	connectedCallback(): void {
 		console.log('CONNECTED CALLBACK', this);
 	}
 
-	disconnectedCallback() {
+	disconnectedCallback(): void {
 		console.log('DISCONNECTED CALLBACK', this);
 	}
 
-	adoptedCallback() {
+	adoptedCallback(): void {
 		console.log('ADOPTED CALLBACK', this);
 	}
 
-	attributeChangedCallback(name: string, oldValue: null | string, newValue: null | string) {
+	attributeChangedCallback(name: string, oldValue: null | string, newValue: null | string): void {
 		console.log('ATTRIBUTE CHANGED CALLBACK', this, name, oldValue, newValue);
 
 		switch (name) {

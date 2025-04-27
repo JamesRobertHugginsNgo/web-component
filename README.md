@@ -2,7 +2,7 @@
 
 [![Open in Github](https://img.shields.io/badge/Open_in_GitHub-6e5494)](https://github.com/JamesRobertHugginsNgo/web-component/)
 [![Open in Github Page](https://img.shields.io/badge/Open_in_GitHub_Page-4078c0)](https://jamesroberthugginsngo.github.io/web-component/)
-[![Open Tag](https://img.shields.io/badge/Open_Tag-2.0.0-6cc644)](https://github.com/JamesRobertHugginsNgo/web-component/tree/2.0.0)
+[![Open Tag](https://img.shields.io/badge/Open_Tag-2.1.0-6cc644)](https://github.com/JamesRobertHugginsNgo/web-component/tree/2.1.0)
 
 Boilerplate code for creating web components.
 
@@ -37,3 +37,8 @@ A form input component that will work with a standard HTML form element.
 
 - https://developer.mozilla.org/en-US/docs/Web/API/Web_components
 - https://webkit.org/blog/13711/elementinternals-and-form-associated-custom-elements/
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for more details.
+

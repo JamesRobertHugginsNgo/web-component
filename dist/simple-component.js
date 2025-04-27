@@ -26,6 +26,9 @@ export default class SimpleComponent extends HTMLElement {
 		return this.#greeting;
 	}
 	set greeting(newValue) {
+		if (this.#greeting === newValue) {
+			return;
+		}
 		this.#greeting = newValue;
 		if (this.#greeting == null) {
 			this.#rootEl.replaceChildren('Hello ', this.#slotEL);

@@ -1,12 +1,12 @@
 // == TEMPLATE(S) ==
 
-const templateEl = document.createElement('template');
+const templateEl: HTMLTemplateElement = document.createElement('template');
 templateEl.innerHTML = `
 	<link rel="stylesheet" href="${import.meta.resolve('./advance-component.css')}">
 	<ol></ol>
 `;
 
-const itemTemplateEl = document.createElement('template');
+const itemTemplateEl: HTMLTemplateElement = document.createElement('template');
 itemTemplateEl.innerHTML = `
 	<li><img src="${import.meta.resolve('./advance-component.svg')}"> <slot></slot></li>
 `;
@@ -17,7 +17,9 @@ export default class AdvanceComponent extends HTMLElement {
 
 	// -- STATIC PROPERTY(IES) --
 
-	static observedAttributes = [ 'start' ];
+	static observedAttributes: string[] = [
+		'start'
+	];
 
 	// -- STATIC METHOD(S) --
 
@@ -25,11 +27,11 @@ export default class AdvanceComponent extends HTMLElement {
 
 	#listEl: HTMLOListElement;
 
-	#start: null | string = null;
+	#start: number = 1;
 
 	// -- PRIVATE METHOD(S) --
 
-	#mutationCallback() {
+	#mutationCallback(): void {
 		console.log('MUTATION CALLBACK', this);
 
 		const itemEls = [];
@@ -44,16 +46,22 @@ export default class AdvanceComponent extends HTMLElement {
 
 	// -- PUBLIC PROPERTY(IES) --
 
-	get start() {
+	get start(): number {
 		return this.#start;
 	}
-	set start(newValue) {
-		this.#start = newValue;
-		if (this.#start == null) {
-			this.#listEl.removeAttribute('start');
-		} else {
-			this.#listEl.setAttribute('start', this.#start);
+	set start(newValue: number) {
+		if (this.#start === newValue) {
+			return;
 		}
+
+		this.#start = newValue;
+
+		if (this.#start == 1) {
+			this.#listEl.removeAttribute('start');
+			return;
+		}
+
+		this.#listEl.setAttribute('start', String(this.#start));
 	}
 
 	// -- PUBLIC METHOD(S) --
@@ -79,25 +87,35 @@ export default class AdvanceComponent extends HTMLElement {
 		this.#mutationCallback();
 	}
 
-	connectedCallback() {
+	connectedCallback(): void {
 		console.log('CONNECTED CALLBACK', this);
 	}
 
-	disconnectedCallback() {
+	disconnectedCallback(): void {
 		console.log('DISCONNECTED CALLBACK', this);
 	}
 
-	adoptedCallback() {
+	adoptedCallback(): void {
 		console.log('ADOPTED CALLBACK', this);
 	}
 
-	attributeChangedCallback(name: string, oldValue: null | string, newValue: null | string) {
+	attributeChangedCallback(name: string, oldValue: null | string, newValue: null | string): void {
 		console.log('ATTRIBUTE CHANGED CALLBACK', this, name, oldValue, newValue);
 
 		switch (name) {
-			case 'start':
-				this.start = newValue;
+			case 'start': {
+				if (newValue == null) {
+					this.start = 1;
+					break;
+				}
+				const numberValue = +newValue;
+				if (isNaN(numberValue)) {
+					this.start = 1;
+					break;
+				}
+				this.start = numberValue;
 				break;
+			}
 		}
 	}
 }

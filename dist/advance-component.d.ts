@@ -1,8 +1,8 @@
 export default class AdvanceComponent extends HTMLElement {
 	#private;
 	static observedAttributes: string[];
-	get start(): string | null;
-	set start(newValue: string | null);
+	get start(): number;
+	set start(newValue: number);
 	constructor();
 	connectedCallback(): void;
 	disconnectedCallback(): void;
