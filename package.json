@@ -5,8 +5,34 @@
   "keywords": [],
   "author": "James Robert Huggins Ngo",
   "license": "MIT",
+  "homepage": "https://github.com/JamesRobertHugginsNgo/web-component#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesRobertHugginsNgo/web-component.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JamesRobertHugginsNgo/web-component/issues"
+  },
   "type": "module",
-  "main": "src/script.js",
+  "main": "",
+  "exports": {
+    ".": {
+      "types": "./dist/web-component.d.ts",
+      "default": "./dist/web-component.js"
+    },
+    "./advance-component": {
+      "types": "./dist/advance-component.d.ts",
+      "default": "./dist/advance-component.js"
+    },
+    "./form-component": {
+      "types": "./dist/form-component.d.ts",
+      "default": "./dist/form-component.js"
+    },
+    "./simple-component": {
+      "types": "./dist/simple-component.d.ts",
+      "default": "./dist/simple-component.js"
+    }
+  },
   "scripts": {
     "build": "tsc -project ./tsconfig.json && prettier --single-quote --write ./dist/**/*.[tj]s",
     "watch": "tsc -project ./tsconfig.json --watch",

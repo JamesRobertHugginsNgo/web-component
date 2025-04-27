@@ -1,4 +1,3 @@
-'use strict';
 // == TEMPLATE ==
 const templateEl = document.createElement('template');
 templateEl.innerHTML = `
@@ -25,7 +24,7 @@ templateEl.innerHTML = `
 	<input type="text">
 `;
 // == CLASS ==
-class FormComponent extends HTMLElement {
+export default class FormComponent extends HTMLElement {
 	// -- STATIC PROPERTY(IES) --
 	static formAssociated = true;
 	static observedAttributes = ['readonly', 'required', 'value'];
@@ -33,8 +32,8 @@ class FormComponent extends HTMLElement {
 	// -- PRIVATE PROPERTY(IES) --
 	#internals;
 	#inputEl;
-	#readOnly = null;
-	#required = null;
+	#readOnly = false;
+	#required = false;
 	// -- PRIVATE METHOD(S) --
 	#setFormValue() {
 		this.#internals.setFormValue(this.#inputEl.value);
@@ -55,24 +54,32 @@ class FormComponent extends HTMLElement {
 		return this.#readOnly;
 	}
 	set readonly(newValue) {
-		this.#readOnly = newValue;
-		if (this.#readOnly == null) {
-			this.#inputEl.removeAttribute('readonly');
-		} else {
-			this.#inputEl.setAttribute('readonly', '');
+		if (this.#readOnly === newValue) {
+			return;
 		}
+		this.#readOnly = newValue;
+		if (!this.#readOnly) {
+			this.#inputEl.removeAttribute('readonly');
+			this.#setValidity();
+			return;
+		}
+		this.#inputEl.setAttribute('readonly', '');
 		this.#setValidity();
 	}
 	get required() {
 		return this.#required;
 	}
 	set required(newValue) {
-		this.#required = newValue;
-		if (this.#required == null) {
-			this.#inputEl.removeAttribute('required');
-		} else {
-			this.#inputEl.setAttribute('required', '');
+		if (this.#required === newValue) {
+			return;
 		}
+		this.#required = newValue;
+		if (!this.#required) {
+			this.#inputEl.removeAttribute('required');
+			this.#setValidity();
+			return;
+		}
+		this.#inputEl.setAttribute('required', '');
 		this.#setValidity();
 	}
 	get validity() {
@@ -88,14 +95,14 @@ class FormComponent extends HTMLElement {
 		this.#inputEl.value = newValue;
 		this.#setFormValue();
 	}
-	// PUBLIC METHOD(S)
+	// -- PUBLIC METHOD(S) --
 	checkValidity() {
 		return this.#internals.checkValidity();
 	}
 	reportValidity() {
 		return this.#internals.reportValidity();
 	}
-	// LIFE CYCLE
+	// -- LIFE CYCLE --
 	constructor() {
 		super();
 		console.log('CONSTRUCTOR', this);
@@ -130,16 +137,17 @@ class FormComponent extends HTMLElement {
 		);
 		switch (name) {
 			case 'readonly':
-				this.readonly = newValue;
+				this.readonly = newValue != null;
 				break;
 			case 'required':
-				this.required = newValue;
+				this.required = newValue != null;
 				break;
 			case 'value':
 				this.value = newValue;
 				break;
 		}
 	}
+	// -- FORM LIFE CYCLE --
 	formAssociatedCallback(formEl) {
 		console.log('FORM ASSOCIATED CALLBACK', this, formEl);
 	}

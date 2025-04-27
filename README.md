@@ -37,3 +37,8 @@ A form input component that will work with a standard HTML form element.
 
 - https://developer.mozilla.org/en-US/docs/Web/API/Web_components
 - https://webkit.org/blog/13711/elementinternals-and-form-associated-custom-elements/
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for more details.
+
