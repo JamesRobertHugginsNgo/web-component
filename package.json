@@ -3,7 +3,11 @@
   "version": "2.1.0",
   "description": "",
   "keywords": [],
-  "author": "James Robert Huggins Ngo",
+  "author": {
+    "name": "James Robert Huggins Ngo",
+    "email": "jamesroberthugginsngo@gmail.com",
+    "url": "https://jamesroberthugginsngo.github.io"
+  },
   "license": "MIT",
   "homepage": "https://github.com/JamesRobertHugginsNgo/web-component#readme",
   "repository": {
@@ -14,7 +18,7 @@
     "url": "https://github.com/JamesRobertHugginsNgo/web-component/issues"
   },
   "type": "module",
-  "main": "",
+  "main": "./src/web-component.js",
   "exports": {
     ".": {
       "types": "./dist/web-component.d.ts",
